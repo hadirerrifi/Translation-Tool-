@@ -1,0 +1,55 @@
+!pip install googletrans==4.0.0-rc1
+
+from googletrans import Translator
+
+# Function to translate text using Google Translate
+def translate_text(text, target_language='en'):
+    """Translates text using Google Translate.
+
+    Args:
+        text: The text to translate.
+        target_language: The target language code (e.g., 'en' for English, 'fr' for French).
+
+    Returns:
+        The translated text.
+    """
+    try:
+        translator = Translator()
+        translated = translator.translate(text, dest=target_language)
+        return translated.text
+    except Exception as e:
+        print(f"Error during translation: {e}")
+        return None
+
+# Main program to take user input
+def main():
+    text_to_translate = input("Enter the text to translate: ")
+
+    # Language options and selection
+    print("\nChoose the target language:")
+    print("1. French (fr)")
+    print("2. Spanish (es)")
+    print("3. English (en)")
+    language_choice = input("Enter 1 for French, 2 for Spanish, 3 for English: ")
+
+    # Set target language code based on user input
+    if language_choice == '1':
+        target_language = 'fr'
+    elif language_choice == '2':
+        target_language = 'es'
+    elif language_choice == '3':
+        target_language = 'en'
+    else:
+        print("Invalid choice. Defaulting to English.")
+        target_language = 'en'
+
+    # Translate the text
+    translated_text = translate_text(text_to_translate, target_language)
+
+    if translated_text:
+        print(f"\nOriginal text: {text_to_translate}")
+        print(f"Translated text: {translated_text}")
+
+# Run the main function
+if __name__ == "__main__":
+    main()
